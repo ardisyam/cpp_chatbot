@@ -18,6 +18,8 @@ private:
     GraphNode *_rootNode;
     ChatLogic *_chatLogic;
 
+    ChatBot *_chatBot;
+
     // proprietary functions
     int ComputeLevenshteinDistance(std::string s1, std::string s2);
 
@@ -38,6 +40,7 @@ public:
     void SetCurrentNode(GraphNode *node);
     void SetRootNode(GraphNode *rootNode) { _rootNode = rootNode; }
     void SetChatLogicHandle(ChatLogic *chatLogic) { _chatLogic = chatLogic; }
+    void SetChatbotHandle(ChatBot *chatbot) { _chatBot = chatbot; }
     wxBitmap *GetImageHandle() { return _image; }
 
     // communication

@@ -45,6 +45,16 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 // Copy constructor
 ChatBot::ChatBot(const ChatBot &source) {
+    if (this == &source) {
+        return;
+    }
+    delete this->_image;
+    this->_image = new wxBitmap(*source._image);
+    this->_currentNode = source._currentNode;
+    this->_rootNode = source._rootNode;
+    this->_chatLogic->SetChatbotHandle(this);
+
+/*
     // Allocate memory
     _currentNode =  new GraphNode(0);
     _rootNode = new GraphNode(0);
@@ -54,10 +64,22 @@ ChatBot::ChatBot(const ChatBot &source) {
     *_rootNode = *source._rootNode;
     //*_chatLogic = *source._chatLogic;
     _chatLogic = source._chatLogic;
+*/
 }
 
 // Move constructor
 ChatBot::ChatBot(ChatBot &&source) {
+    this->_image = source._image;
+    this->_currentNode = source._currentNode;
+    this->_rootNode = source._rootNode;
+    this->_chatLogic->SetChatbotHandle(this);
+
+    source._image = NULL;
+    source._currentNode = nullptr;
+    source._rootNode = nullptr;
+    source._chatLogic = nullptr;
+
+/*
     // No need to allocate memory
     _currentNode = source._currentNode;
     _rootNode = source._rootNode;
@@ -66,6 +88,7 @@ ChatBot::ChatBot(ChatBot &&source) {
     _currentNode = nullptr;
     _rootNode = nullptr;
     _chatLogic = nullptr;
+*/
 }
 
 // Copy assignment operator
@@ -74,6 +97,15 @@ ChatBot &ChatBot::operator=(const ChatBot &source) {
     if (this == &source) {
         return *this;
     }
+    
+    delete this->_image;
+    this->_image = new wxBitmap(*source._image);
+    this->_currentNode = source._currentNode;
+    this->_rootNode = source._rootNode;
+    this->_chatLogic->SetChatbotHandle(this);
+    return *this;
+
+/*
     // Delete the destination
     delete _currentNode;
     delete _rootNode;
@@ -88,6 +120,7 @@ ChatBot &ChatBot::operator=(const ChatBot &source) {
     //*_chatLogic = *source._chatLogic;
     _chatLogic = source._chatLogic;
     return *this;
+*/
 }
 
 // Move assignment operator
@@ -96,6 +129,19 @@ ChatBot &ChatBot::operator=(ChatBot &&source) {
     if (this == &source) {
         return *this;
     }
+    this->_image = source._image;
+    this->_currentNode = source._currentNode;
+    this->_rootNode = source._rootNode;
+    this->_chatLogic->SetChatbotHandle(this);
+
+    source._image = NULL;
+    source._currentNode = nullptr;
+    source._rootNode = nullptr;
+    source._chatLogic = nullptr;
+
+    return *this;
+
+/*
     // Delete the destination
     delete _currentNode;
     delete _rootNode;
@@ -109,6 +155,7 @@ ChatBot &ChatBot::operator=(ChatBot &&source) {
     source._rootNode = nullptr;
     source._chatLogic = nullptr;
     return *this;
+*/
 }
 //// EOF STUDENT CODE
 

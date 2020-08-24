@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include "chatbot.h"
 #include "chatgui.h"
 
 using namespace std;

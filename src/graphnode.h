@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 #include "chatbot.h"
 
 
@@ -40,8 +41,9 @@ public:
     // getter / setter
     int GetID() { return _id; }
     int GetNumberOfChildEdges() { return _childEdges.size(); }
-    //GraphEdge *GetChildEdgeAtIndex(int index);
-    std::unique_ptr<GraphEdge> GetChildEdgeAtIndex(int index);
+    GraphEdge *GetChildEdgeAtIndex(int index);
+    //std::unique_ptr<GraphEdge> GetChildEdgeAtIndex(int index);
+    //auto GetChildEdgeAtIndex(int index);
     std::vector<std::string> GetAnswers() { return _answers; }
     int GetNumberOfParents() { return _parentEdges.size(); }
 
@@ -53,8 +55,8 @@ public:
 
     //// STUDENT CODE
     ////
-
-    void MoveChatbotHere(ChatBot *chatbot);
+    void MoveChatbotHere(ChatBot chatbot);
+    //void MoveChatbotHere();
 
     ////
     //// EOF STUDENT CODE
