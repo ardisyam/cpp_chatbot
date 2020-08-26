@@ -115,7 +115,6 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     wxInitAllImageHandlers();
 
     //// STUDENT CODE
-    ////
 
     // create chat logic instance
     //_chatLogic = new ChatLogic(); 
@@ -127,7 +126,6 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     // load answer graph from file
     _chatLogic->LoadAnswerGraphFromFile(dataPath + "src/answergraph.txt");
 
-    ////
     //// EOF STUDENT CODE
 }
 
