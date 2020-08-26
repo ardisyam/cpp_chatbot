@@ -56,15 +56,10 @@ void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 //// EOF STUDENT CODE
 
 GraphEdge *GraphNode::GetChildEdgeAtIndex(int index)
-//std::unique_ptr<GraphEdge> GetChildEdgeAtIndex(int index)
-//auto GetChildEdgeAtIndex(int index)
 {
     //// STUDENT CODE
     ////
-
-    return _childEdges[index];
-    //return std::move(_childEdges[index]);
-
+    return _childEdges[index].get();
     ////
     //// EOF STUDENT CODE
 }

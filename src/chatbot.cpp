@@ -34,17 +34,20 @@ ChatBot::~ChatBot()
 {
     std::cout << "ChatBot Destructor" << std::endl;
 
-    // deallocate heap memory    
+    // deallocate heap memory  
+    
     if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
     {
         delete _image;
         _image = NULL;
     }
+    
 }
 
 //// STUDENT CODE
 // Copy constructor
 ChatBot::ChatBot(const ChatBot &source) {
+    cout << "Copy constructor" << endl;
     if (this == &source) {
         return;
     }
@@ -52,47 +55,28 @@ ChatBot::ChatBot(const ChatBot &source) {
     this->_image = new wxBitmap(*source._image);
     this->_currentNode = source._currentNode;
     this->_rootNode = source._rootNode;
+    this->_chatLogic = source._chatLogic;
     this->_chatLogic->SetChatbotHandle(this);
-
-/*
-    // Allocate memory
-    _currentNode =  new GraphNode(0);
-    _rootNode = new GraphNode(0);
-    _chatLogic = new ChatLogic();
-    // Copy from a source to a destination
-    *_currentNode = *source._currentNode;
-    *_rootNode = *source._rootNode;
-    //*_chatLogic = *source._chatLogic;
-    _chatLogic = source._chatLogic;
-*/
 }
 
 // Move constructor
 ChatBot::ChatBot(ChatBot &&source) {
+    cout << "Move constructor" << endl;
     this->_image = source._image;
     this->_currentNode = source._currentNode;
     this->_rootNode = source._rootNode;
+    this->_chatLogic = source._chatLogic;
     this->_chatLogic->SetChatbotHandle(this);
-
+    
     source._image = NULL;
     source._currentNode = nullptr;
     source._rootNode = nullptr;
     source._chatLogic = nullptr;
-
-/*
-    // No need to allocate memory
-    _currentNode = source._currentNode;
-    _rootNode = source._rootNode;
-    _chatLogic = source._chatLogic;
-    // Delete the source memory
-    _currentNode = nullptr;
-    _rootNode = nullptr;
-    _chatLogic = nullptr;
-*/
 }
 
 // Copy assignment operator
 ChatBot &ChatBot::operator=(const ChatBot &source) {
+    cout << "Copy assignment opearator" << endl;
     // You cannot copy to yourself
     if (this == &source) {
         return *this;
@@ -102,29 +86,17 @@ ChatBot &ChatBot::operator=(const ChatBot &source) {
     this->_image = new wxBitmap(*source._image);
     this->_currentNode = source._currentNode;
     this->_rootNode = source._rootNode;
+    this->_chatLogic = source._chatLogic;
     this->_chatLogic->SetChatbotHandle(this);
+    
     return *this;
 
-/*
-    // Delete the destination
-    delete _currentNode;
-    delete _rootNode;
-    delete _chatLogic;
-    // Allocate memory for destination
-    _currentNode =  new GraphNode(0);
-    _rootNode = new GraphNode(0);
-    _chatLogic = new ChatLogic();
-    // Still pointing to the source resources
-    *_currentNode = *source._currentNode;
-    *_rootNode = *source._rootNode;
-    //*_chatLogic = *source._chatLogic;
-    _chatLogic = source._chatLogic;
-    return *this;
-*/
+
 }
 
 // Move assignment operator
 ChatBot &ChatBot::operator=(ChatBot &&source) {
+    cout << "Move assignment operator" << endl;
     // You cannot copy to yourself
     if (this == &source) {
         return *this;
@@ -132,30 +104,15 @@ ChatBot &ChatBot::operator=(ChatBot &&source) {
     this->_image = source._image;
     this->_currentNode = source._currentNode;
     this->_rootNode = source._rootNode;
-    this->_chatLogic->SetChatbotHandle(this);
-
+    this->_chatLogic = source._chatLogic;
+    //this->_chatLogic->SetChatbotHandle(this);
+    
     source._image = NULL;
     source._currentNode = nullptr;
     source._rootNode = nullptr;
     source._chatLogic = nullptr;
 
     return *this;
-
-/*
-    // Delete the destination
-    delete _currentNode;
-    delete _rootNode;
-    delete _chatLogic;
-    // Copying from the source resources
-    _currentNode = source._currentNode;
-    _rootNode = source._rootNode;
-    _chatLogic = source._chatLogic;
-    // Delete the source resources
-    source._currentNode = nullptr;
-    source._rootNode = nullptr;
-    source._chatLogic = nullptr;
-    return *this;
-*/
 }
 //// EOF STUDENT CODE
 
